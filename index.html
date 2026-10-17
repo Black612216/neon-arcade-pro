@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080b16">
+  <meta name="description" content="NEON ARCADE — 进入你的霓虹游戏空间。">
+  <title>NEON ARCADE — Play Beyond</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="NEON ARCADE 首页"><span class="brand-mark">N<span>+</span></span><span>NEON<span class="muted"> ARCADE</span></span></a>
+    <nav><a href="#games">游戏大厅</a><a href="#rank">排行榜</a><a href="#profile">玩家档案</a></nav>
+    <div class="account" id="account"><button class="btn btn-ghost" id="loginOpen">登录 / 注册</button></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> ARCADE SYSTEM ONLINE <span class="mono">/ 001</span></div>
+        <h1>PLAY<br><span class="gradient-text">BEYOND.</span></h1>
+        <p class="hero-sub">你的下一场高分挑战，现在开始。</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#games">进入游戏大厅 <span>↗</span></a><a class="btn btn-ghost" href="#rank">查看排行榜</a></div>
+        <div class="hero-stats"><div><strong id="gameCount">04</strong><span>ARCADE GAMES</span></div><div><strong id="playerLabel">∞</strong><span>PLAYER ENERGY</span></div><div><strong>24/7</strong><span>ALWAYS ON</span></div></div>
+      </div>
+      <div class="hero-art" aria-label="霓虹抽象游戏核心装饰"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="core"><span>N</span></div><div class="art-label label-a">SYSTEM READY</div><div class="art-label label-b">LATENCY: LOW</div><div class="art-cross">＋</div></div>
+    </section>
+    <section class="section" id="games">
+      <div class="section-head"><div><div class="eyebrow">01 / SELECT YOUR MODE</div><h2>游戏大厅<span class="title-dot">.</span></h2></div><div class="filters"><label class="searchbox"><span>⌕</span><input id="search" placeholder="搜索游戏..." autocomplete="off"></label><select id="category"><option value="all">全部类型</option><option>反应</option><option>记忆</option><option>街机</option><option>益智</option></select></div></div>
+      <div class="game-grid" id="gameGrid"><div class="loading">正在连接街机系统…</div></div>
+    </section>
+    <section class="split-section">
+      <div class="panel leaderboard" id="rank"><div class="panel-head"><div><div class="eyebrow">02 / GLOBAL SCORE</div><h2>排行榜<span class="title-dot">.</span></h2></div><span class="pill">LIVE DATA</span></div><div id="leaderboard" class="rank-list"><p class="muted">加载排行榜中…</p></div></div>
+      <div class="panel profile" id="profile"><div class="eyebrow">03 / YOUR SPACE</div><h2>玩家档案<span class="title-dot">.</span></h2><div id="profileContent"><div class="profile-icon">?</div><h3>尚未登录</h3><p class="muted">登录后保存成绩，加入排行榜。</p><button class="btn btn-primary" id="profileLogin">创建玩家档案 ↗</button></div></div>
+    </section>
+    <section class="admin-section hidden" id="adminSection"><div class="section-head"><div><div class="eyebrow">04 / CONTROL ROOM</div><h2>控制中心<span class="title-dot">.</span></h2></div><span class="pill pill-admin">ADMIN ACCESS</span></div><div class="admin-grid"><div class="panel"><h3>平台概览</h3><div id="overview" class="overview-grid"></div></div><div class="panel"><h3>添加游戏条目</h3><form id="addGameForm" class="admin-form"><input name="id" placeholder="游戏 ID，例如 space-run" required pattern="[a-z0-9-]{2,24}"><input name="title" placeholder="游戏名称" required maxlength="50"><input name="category" placeholder="类型" required maxlength="20"><input name="description" placeholder="简短介绍" required maxlength="180"><button class="btn btn-primary" type="submit">添加游戏 +</button></form></div></div><div class="panel"><h3>游戏可见性管理</h3><div id="adminGames" class="admin-games"></div></div></section>
+  </main>
+  <footer><a class="brand" href="#"><span class="brand-mark">N<span>+</span></span><span>NEON<span class="muted"> ARCADE</span></span></a><span>BUILT FOR THE NEXT HIGH SCORE.</span><span class="mono">V 1.0.0 / SYSTEM ONLINE</span></footer>
+  <div class="modal-backdrop hidden" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="modal"><button class="modal-close" id="modalClose" aria-label="关闭">×</button><div class="eyebrow">PLAYER ACCESS / AUTH</div><h2 id="authTitle">欢迎回来<span class="title-dot">.</span></h2><p class="muted" id="authHint">登录后保存成绩和玩家档案。</p><div class="auth-tabs"><button class="active" data-mode="login">登录</button><button data-mode="register">注册</button></div><form id="authForm"><label>玩家名称<input name="username" required minlength="3" maxlength="20" autocomplete="username" placeholder="3–20 位字符"></label><label>密码<input name="password" type="password" required minlength="8" maxlength="128" autocomplete="current-password" placeholder="至少 8 个字符"></label><button class="btn btn-primary full" type="submit" id="authSubmit">登录系统 ↗</button><p id="authMessage" class="form-message" aria-live="polite"></p></form><p class="fine-print">请使用独立密码。正式部署请启用 HTTPS 并配置安全环境变量。</p></div></div>
+  <div class="game-backdrop hidden" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="gameTitle"><div class="game-window"><div class="game-window-head"><div><span class="eyebrow">ARCADE SESSION</span><h2 id="gameTitle">游戏</h2></div><button class="modal-close" id="gameClose" aria-label="关闭游戏">×</button></div><div id="gameBody" class="game-body"></div><div id="gameStatus" class="game-status">准备开始</div></div></div>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
